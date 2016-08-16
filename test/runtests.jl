@@ -28,7 +28,8 @@ checkvals(v)
 @test shift!(v) == 1
 @test indices(v,1) == 2:8
 checkvals(v)
-@test isa(unshift!(v, -1, 0, 1), BidirectionalVector)
+@test isa(unshift!(v, 0, 1), BidirectionalVector)
+@test isa(unshift!(v, -1), BidirectionalVector)
 @test indices(v,1) == -1:8
 checkvals(v)
 @test isa(prepend!(v, -5:-2), BidirectionalVector)
@@ -50,6 +51,8 @@ a = similar(Array{Float64}, indices(v))
 
 ### vcat
 
+@test !CatIndices.is_pinned(1:3)
+@test CatIndices.is_pinned(PinIndices(1:3))
 v = vcat(1:3, PinIndices(4:5), 6:10)
 @test indices(v,1) == -2:7
 @test_throws ArgumentError vcat(1:3, PinIndices(4:5), PinIndices(6:10))

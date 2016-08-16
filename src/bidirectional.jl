@@ -83,4 +83,3 @@ function deletehead!(v::BidirectionalVector, n::Integer)
 end
 
 _length(a::AbstractArray) = length(linearindices(a))
-_length(t) = length(t)
