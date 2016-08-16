@@ -1,6 +1,8 @@
 using CatIndices
 using Base.Test
 
+### BidirectionalVector
+
 function checkvals(v)
     for i in indices(v,1)
         @test v[i] == i
@@ -45,5 +47,11 @@ v[0] = 200
 a = similar(Array{Float64}, indices(v))
 @test isa(a, BidirectionalVector)
 @test indices(a) === indices(v)
+
+### vcat
+
+v = vcat(1:3, PinIndices(4:5), 6:10)
+@test indices(v,1) == -2:7
+@test_throws ArgumentError vcat(1:3, PinIndices(4:5), PinIndices(6:10))
 
 nothing
