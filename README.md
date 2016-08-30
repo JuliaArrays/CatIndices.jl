@@ -1,8 +1,8 @@
 # CatIndices
 
-[![Build Status](https://travis-ci.org/timholy/CatIndices.jl.svg?branch=master)](https://travis-ci.org/timholy/CatIndices.jl)
+[![Build Status](https://travis-ci.org/JuliaArrays/CatIndices.jl.svg?branch=master)](https://travis-ci.org/JuliaArrays/CatIndices.jl)
 
-[![codecov.io](http://codecov.io/github/timholy/CatIndices.jl/coverage.svg?branch=master)](http://codecov.io/github/timholy/CatIndices.jl?branch=master)
+[![codecov.io](http://codecov.io/github/JuliaArrays/CatIndices.jl/coverage.svg?branch=master)](http://codecov.io/github/JuliaArrays/CatIndices.jl?branch=master)
 
 A Julia package for concatenating, growing, and shrinking arrays in
 ways that allow control over the resulting indices.
