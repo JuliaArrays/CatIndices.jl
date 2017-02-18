@@ -30,7 +30,7 @@ function Base.similar(v::AbstractArray, T::Type, inds::Tuple{URange})
     BidirectionalVector(Array{T}(n), first(inds1)-1)
 end
 
-function Base.similar(f::Union{Function,DataType}, inds::Tuple{URange})
+function Base.similar(f::Union{Function,Type}, inds::Tuple{URange})
     inds1 = inds[1]
     n = length(inds1)
     BidirectionalVector(f(Base.OneTo(n)), first(inds1)-1)
