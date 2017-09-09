@@ -1,16 +1,16 @@
 using CustomUnitRanges
 include(CustomUnitRanges.filename_for_urange)  # defines URange
 
-type BidirectionalVector{T} <: AbstractVector{T}
+mutable struct BidirectionalVector{T} <: AbstractVector{T}
     data::Vector{T}
     offset::Int
 end
-BidirectionalVector{T}(v::AbstractVector{T}, inds::AbstractUnitRange) =
+BidirectionalVector(v::AbstractVector{T}, inds::AbstractUnitRange) where {T} =
     BidirectionalVector(copyelts(v), first(inds)-1)
 BidirectionalVector(v::AbstractVector) = BidirectionalVector(v, Base.indices1(v))
 
 # copies but doesn't preserve the indices
-function copyelts{T}(v::AbstractVector{T})
+function copyelts(v::AbstractVector{T}) where T
     inds = Base.indices1(v)
     n = length(inds)
     dest = Array{T}(n)
