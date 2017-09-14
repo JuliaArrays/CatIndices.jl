@@ -1,4 +1,4 @@
-immutable PinIndices{T}
+struct PinIndices{T}
     x::T
 end
 is_pinned(x) = false
