@@ -1,5 +1,3 @@
-__precompile__()
-
 module CatIndices
 
 export BidirectionalVector, PinIndices, deletetail!, deletehead!

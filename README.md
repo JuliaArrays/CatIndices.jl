@@ -5,15 +5,15 @@
 [![codecov.io](http://codecov.io/github/JuliaArrays/CatIndices.jl/coverage.svg?branch=master)](http://codecov.io/github/JuliaArrays/CatIndices.jl?branch=master)
 
 A Julia package for concatenating, growing, and shrinking arrays in
-ways that allow control over the resulting indices.
+ways that allow control over the resulting axes.
 
 # Usage
 
 ## BidirectionalVector
 
-These vectors can grow or shrink from either end, and the indices
+These vectors can grow or shrink from either end, and the axes
 update correspondingly. In this demo, pay careful attention to the
-indices at each step:
+axes at each step:
 
 ```julia
 julia> using CatIndices
@@ -46,13 +46,13 @@ CatIndices.BidirectionalVector{Float64} with indices CatIndices.URange(-2,5):
 julia> pop!(v)
 0.28257294456774673
 
-julia> indices(v)
+julia> axes(v)
 (CatIndices.URange(-2,4),)
 
-julia> shift!(v)
+julia> popfirst!(v)
 0.9929020233076613
 
-julia> indices(v)
+julia> axes(v)
 (CatIndices.URange(-1,4),)
 ```
 

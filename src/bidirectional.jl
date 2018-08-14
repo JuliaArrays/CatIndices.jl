@@ -7,27 +7,28 @@ mutable struct BidirectionalVector{T} <: AbstractVector{T}
 end
 BidirectionalVector(v::AbstractVector{T}, inds::AbstractUnitRange) where {T} =
     BidirectionalVector(copyelts(v), first(inds)-1)
-BidirectionalVector(v::AbstractVector) = BidirectionalVector(v, Base.indices1(v))
+BidirectionalVector(v::AbstractVector) = BidirectionalVector(v, Base.axes1(v))
 
-# copies but doesn't preserve the indices
+# copies but doesn't preserve the axes
 function copyelts(v::AbstractVector{T}) where T
-    inds = Base.indices1(v)
+    inds = Base.axes1(v)
     n = length(inds)
-    dest = Array{T}(n)
+    dest = Array{T}(undef, n)
     for (vel, j) in zip(v, 1:n)
         dest[j] = vel
     end
     dest
 end
 
-# Don't implement size or length
-Base.indices1(v::BidirectionalVector) = URange(1+v.offset, length(v.data)+v.offset)
-Base.indices( v::BidirectionalVector) = (Base.indices1(v),)
+Base.axes1(v::BidirectionalVector) = URange(1+v.offset, length(v.data)+v.offset)
+Base.axes( v::BidirectionalVector) = (Base.axes1(v),)
+Base.size( v::BidirectionalVector) = (length(v),)
+Base.length(v::BidirectionalVector) = length(v.data)
 
 function Base.similar(v::AbstractArray, T::Type, inds::Tuple{URange})
     inds1 = inds[1]
     n = length(inds1)
-    BidirectionalVector(Array{T}(n), first(inds1)-1)
+    BidirectionalVector(Array{T}(undef, n), first(inds1)-1)
 end
 
 function Base.similar(f::Union{Function,Type}, inds::Tuple{URange})
@@ -52,22 +53,22 @@ Base.push!(v::BidirectionalVector, x) = (push!(v.data, x); v)
 Base.pop!(v::BidirectionalVector) = pop!(v.data)
 Base.append!(v::BidirectionalVector, collection2) = (append!(v.data, collection2); v)
 function Base.prepend!(v::BidirectionalVector, collection2)
-    v.offset -= _length(collection2)
+    v.offset -= length(collection2)
     prepend!(v.data, collection2)
     v
 end
-function Base.shift!(v::BidirectionalVector)
+function Base.popfirst!(v::BidirectionalVector)
     v.offset += 1
-    shift!(v.data)
+    popfirst!(v.data)
 end
-function Base.unshift!(v::BidirectionalVector, x)
+function Base.pushfirst!(v::BidirectionalVector, x)
     v.offset -= 1
-    unshift!(v.data, x)
+    pushfirst!(v.data, x)
     v
 end
-@inline function Base.unshift!(v::BidirectionalVector, y...)
+@inline function Base.pushfirst!(v::BidirectionalVector, y...)
     v.offset -= length(y)
-    unshift!(v.data, y...)
+    pushfirst!(v.data, y...)
     v
 end
 
@@ -81,5 +82,3 @@ function deletehead!(v::BidirectionalVector, n::Integer)
     deleteat!(v.data, 1:n)
     v
 end
-
-_length(a::AbstractArray) = length(linearindices(a))
