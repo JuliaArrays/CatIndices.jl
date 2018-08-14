@@ -13,10 +13,10 @@ function Base.vcat(X::Union{AbstractVector,PinIndices}...)
     l = f = 0
     for x in X
         if is_pinned(x)
-            f = first(indices(unpin(x),1))
+            f = first(axes(unpin(x),1))
             break
         end
-        l += _length(x)
+        l += length(x)
     end
     OffsetArray(c, (f-l-1,))
 end
