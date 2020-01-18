@@ -63,7 +63,28 @@ many items at the beginning or end of the vector, this package exports
 
 # Concatenation
 
-TODO
+This is still mostly a TODO. For one-dimensional arrays (`AbstractVector`s),
+`PinIndices` provides a convenient interface for specifying which indices "win":
+
+```julia
+julia> v = vcat(1:3, PinIndices(4:5), 6:10)
+10-element OffsetArray(::Array{Int64,1}, -2:7) with eltype Int64 with indices -2:7:
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+
+julia> v[1]
+4
+```
+
+The array wrapped in `PinIndices` keeps its own indexes, and everything else adjusts to compensate.
 
 [pkgeval-img]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/C/CatIndices.svg
 [pkgeval-url]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html
