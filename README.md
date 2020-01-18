@@ -1,8 +1,8 @@
 # CatIndices
 
 [![Build Status](https://travis-ci.org/JuliaArrays/CatIndices.jl.svg?branch=master)](https://travis-ci.org/JuliaArrays/CatIndices.jl)
-
 [![codecov.io](http://codecov.io/github/JuliaArrays/CatIndices.jl/coverage.svg?branch=master)](http://codecov.io/github/JuliaArrays/CatIndices.jl?branch=master)
+[![PkgEval][pkgeval-img]][pkgeval-url]
 
 A Julia package for concatenating, growing, and shrinking arrays in
 ways that allow control over the resulting axes.
@@ -64,3 +64,6 @@ many items at the beginning or end of the vector, this package exports
 # Concatenation
 
 TODO
+
+[pkgeval-img]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/C/CatIndices.svg
+[pkgeval-url]: https://juliaci.github.io/NanosoldierReports/pkgeval_badges/report.html
