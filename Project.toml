@@ -1,0 +1,19 @@
+name = "CatIndices"
+uuid = "aafaddc9-749c-510e-ac4f-586e18779b91"
+author = ["Tim Holy <tim.holy@gmail.com>"]
+version = "0.2.1"
+
+[deps]
+CustomUnitRanges = "dc8bdbbb-1ca9-579f-8c36-e416f6a65cce"
+OffsetArrays = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
+
+[compat]
+CustomUnitRanges = "0.2, 1"
+OffsetArrays = "0.8.1, 0.9, 0.10, 0.11, 1"
+julia = "0.7, 1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
