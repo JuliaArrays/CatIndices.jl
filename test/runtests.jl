@@ -3,6 +3,9 @@ using Test
 
 ### BidirectionalVector
 @testset "CatIndices" begin
+    if Base.VERSION >= v"1.6.0-DEV.1005"
+        @test isempty(detect_ambiguities(CatIndices))
+    end
     function checkvals(v)
         for i in axes(v,1)
             @test v[i] == i

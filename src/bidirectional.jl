@@ -31,10 +31,10 @@ function Base.similar(v::AbstractArray, T::Type, inds::Tuple{URange})
     BidirectionalVector(Array{T}(undef, n), first(inds1)-1)
 end
 
-function Base.similar(f::Union{Function,Type}, inds::Tuple{URange})
+function Base.similar(::Type{T}, inds::Tuple{URange}) where T<:AbstractArray
     inds1 = inds[1]
     n = length(inds1)
-    BidirectionalVector(f(Base.OneTo(n)), first(inds1)-1)
+    BidirectionalVector(T(Base.OneTo(n)), first(inds1)-1)
 end
 
 @inline function Base.getindex(v::BidirectionalVector, i::Int)
