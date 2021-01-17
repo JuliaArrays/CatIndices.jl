@@ -25,7 +25,7 @@ Base.axes( v::BidirectionalVector) = (Base.axes1(v),)
 Base.size( v::BidirectionalVector) = (length(v),)
 Base.length(v::BidirectionalVector) = length(v.data)
 
-function Base.similar(v::AbstractArray, T::Type, inds::Tuple{URange})
+function Base.similar(::AbstractArray, ::Type{T}, inds::Tuple{URange}) where T
     inds1 = inds[1]
     n = length(inds1)
     BidirectionalVector(Array{T}(undef, n), first(inds1)-1)
